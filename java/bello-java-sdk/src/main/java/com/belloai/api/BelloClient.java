@@ -1,5 +1,6 @@
 package com.belloai.api;
 
+import com.belloai.api.internal.BelloCustomerChannelOperation;
 import com.belloai.api.internal.BelloJobOperation;
 import com.belloai.api.internal.BelloUserOperation;
 import com.belloai.api.model.*;
@@ -9,19 +10,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.*;
 
-public class BelloClient implements BelloJob, BelloUser {
+public class BelloClient implements BelloJob, BelloUser, BelloCustomerChannel {
     private BelloJobOperation belloJobOperation;
     private BelloUserOperation belloUserOperation;
+    private BelloCustomerChannelOperation belloCustomerChannelOperation;
 
     private void initOperations() {
         belloJobOperation = new BelloJobOperation();
         belloUserOperation = new BelloUserOperation();
+        belloCustomerChannelOperation = new BelloCustomerChannelOperation();
     }
 
     public BelloClient(String authorization) {
         initOperations();
         belloJobOperation.setAuthorization(authorization);
         belloUserOperation.setAuthorization(authorization);
+        belloCustomerChannelOperation.setAuthorization(authorization);
     }
 
     private com.belloai.api.model.BelloJob getGenericJob(Integer code, String message, Map<String, Object> data) {
@@ -36,7 +40,6 @@ public class BelloClient implements BelloJob, BelloUser {
     private com.belloai.api.model.BelloJob getGenericJob(GenericResult result) {
         return getGenericJob(result.getCode(), result.getMessage(), result.getData());
     }
-
 
     @Override
     public com.belloai.api.model.BelloJob createBelloJob(CreateBelloJobRequest createBelloJobRequest) throws IOException {
@@ -82,5 +85,10 @@ public class BelloClient implements BelloJob, BelloUser {
         GetsertAuthInfoResult getsertAuthInfoResult = belloUserOperation.getsertAuthInfo(getsertAuthInfoRequest);
         ObjectMapper mapper = new ObjectMapper();
         return mapper.convertValue(getsertAuthInfoResult.getData(), BelloUserAuthInfo.class);
+    }
+
+    @Override
+    public SyncBelloCustomerChannelResult syncCustomerChannel(SyncBelloCustomerChannelRequest syncBelloCustomerChannelRequest) throws IOException {
+        return belloCustomerChannelOperation.syncCustomerChannel(syncBelloCustomerChannelRequest);
     }
 }
