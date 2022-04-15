@@ -16,10 +16,10 @@ public class BelloJobPublishCallbackStatusChange {
     private Boolean changed;
     private Map<String, Object> custom_attributes;
 
-    public String getJobId() {
+    public String getJob_id() {
         return job_id;
     }
-    public void setJobId(String job_id) { this.job_id = job_id; }
+    public void setJob_id(String job_id) { this.job_id = job_id; }
 
     public String getChannel() {
         return channel;
@@ -28,21 +28,21 @@ public class BelloJobPublishCallbackStatusChange {
         this.channel = channel;
     }
 
-    public String getChannelStatus() {
+    public String getChannel_status() {
         return channel_status;
     }
-    public void setChannelStatus(String channel_status) { this.channel_status = channel_status; }
+    public void setChannel_status(String channel_status) { this.channel_status = channel_status; }
 
-    public String getJobCode() { return job_code; }
-    public void setJobCode(String job_code) { this.job_code = job_code; }
+    public String getJob_code() { return job_code; }
+    public void setJob_code(String job_code) { this.job_code = job_code; }
 
     public Boolean getChanged() { return changed; }
     public void setChanged(Boolean changed) { this.changed = changed; }
 
-    public Map<String, Object> getCustomAttributes() {
+    public Map<String, Object> getCustom_attributes() {
         return custom_attributes;
     }
-    public void setCategory(Map<String, Object> custom_attributes) {
+    public void setCustom_attributes(Map<String, Object> custom_attributes) {
         this.custom_attributes = custom_attributes;
     }
 }
